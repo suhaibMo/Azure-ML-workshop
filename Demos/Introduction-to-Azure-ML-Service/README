@@ -1,0 +1,217 @@
+# Create Workspace Resources
+
+## Introduction 
+
+In this lab, you will create a workspace in Azure Machine Learning studio. 
+
+## Objectives 
+
+After completing this demo, you will be able to: 
+-   Create an Azure Pass subscription. 
+-   Create Workspace for Azure ML studio
+
+## Estimated Time 
+
+15 minutes 
+
+
+
+## Scenario
+The lab will begin with creating an Azure Pass subscription. You will then create a workspace for Azure Machine Learning studio.
+
+
+## Exercise 1: Create a Microsoft Azure Pass Subscription
+
+This exercise shows how to create an Azure Pass subscription. 
+### Tasks
+
+1. Redeem a Microsoft Azure Pass Promo Code. 
+
+    a.	Open a browser and navigate to: www.microsoftazurepass.com 
+    
+    b.	It is recommended that you close all browsers and open a new **In-Private Browser** session. Other logins can persist and cause errors during activation.
+    
+    c.	Click the ""**Start**" button to get started.
+
+    ![Azure Pass Startpage](Media/azure-pass-start.png)
+    
+    d.	Enter your account login information and select “**Sign In**”.
+    
+    ![MSA-login](Media/msa-login.png)
+
+    e.	Click “**Confirm**” if the correct email address is listed.
+
+    ![azure-pass-sign-in](Media/azure-pass-sign-in.png)
+
+    f.	Enter your promo code in the Promo code box and click "**Claim Promo Code**".
+
+    ![azure-pass-promo-code](Media/azure-pass-promo-code.png)
+
+    g.  It may take up to 5 minutes to process the redemption.
+
+	![azure-pass-processing](Media/azure-pass-processing.png)
+
+2.  Activate your subscription.
+    a.  When the redemption process is completed, it will redirect to the **sign up** page. Enter your account information and click “**Next**”.
+
+    ![azure-pass-sponsor](Media/azure-pass-sponsor.png)
+
+    b.	Click the agreement check box and click the Sign up button. It may take a few minutes to process the request.
+
+    ![azure-pass-agreement](Media/azure-pass-agreement.png)
+
+    c.  Your Azure subcription is ready.
+
+    ![azure-pass-welcome](Media/azure-pass-welcome.png)
+
+### Congratulations!
+
+You have successfully completed this exercise.
+
+===
+
+## Exercise 2: Create an Azure ML studio workspace
+
+This exercise shows how to create an Azure ML studio workspace.  
+
+We will use Azure portal to create workspace in this lab since the portal is the easiest way to get started with workspaces but as your needs change or requirements for automation increase you can also create and delete workspaces using the CLI, with Python code or via the VS Code extension.
+
+---
+
+### Tasks
+
+1.  **Sign** into the **Azure portal** by using the credentials for your Azure subscription.
+2.	Select **+Create a resource** from the upper left corner of the portal.   
+
+3.	In the search box, type **Machine Learning** and select the matching item. Then, click **Create**.
+
+    ![azure-services-create](Media/azure-services-create.png)
+    
+4.	Provide the following information to configure your workspace.
+
+    a.	**Subscription**: Select the Azure subscription that you want to use. 
+
+    b.	**Resource group**: Use an existing one in your subscription or enter a name to create a new one. In this example, we create a new one called **rg-azureml-dev**. 
+
+    c.	**Workspace name**: Enter a unique name across the resource group. It is recommended to use a name which is **easy to recall** and differentiate from workspaces create by others. The name is case-insensitive. In this example we use amlws corresponding the initials of Azure ML Studio workspace. 
+
+    d.	**Region**: Select the location closest to your users and data resources.
+
+    e.	**Storage account, Key vault, Applications insights, Container registry**: leave default values to create these supporting resources.
+
+    ![azure-ml-workspace](Media/azure-ml-workspace.png)
+
+5.	Click **Review + Create**. 
+
+### Congratulations!
+
+You have successfully completed this exercise.
+
+===
+
+## Exercise 3: Create Compute Instance
+
+This exercise will show how to create an online compute resource that has a development environment already installed and ready to go. You'll use this online machine, a compute instance, for your development environment to write and run code in Python scripts and Jupyter notebooks.
+Create a compute instance to use this development environment for the rest of the labs.
+
+
+---
+
+### Tasks
+
+1.	If you didn't select **Go to workspace** in the previous section, sign into Azure Machine Learning studio now, and select your workspace.
+
+    ![azure-directory](Media/azure-directory.png)
+
+2.  On the left side, select **Compute**.
+
+    ![ws-manage-compute](Media/ws-manage-compute.png)
+
+3.  Select **+New** to create a new compute instance.
+
+    ![ws-manage-compute-instance](Media/ws-manage-compute-instance.png)
+
+4.	Supply a name, Keep all the defaults on the first page.
+
+    ![ws-manage-compute-name](Media/ws-manage-compute-name.png)
+
+5.  Select **Create**.
+
+In about two minutes, you'll see the State of the compute instance change from Creating to Running. It's now ready to go.
+
+### Congratulations!
+
+## Exercise 4: Create Compute Clusters
+
+You will create a compute cluster. Clusters allow you to distribute a training or batch inference process across a cluster of CPU or GPU compute nodes in the cloud.
+
+---
+
+### Tasks
+
+Create a computer cluster that will autoscale between zero and four nodes:
+
+1.	Still in the **Compute** section, in the top tab, select **Compute clusters**.
+
+    ![ws-manage-compute-cluster](Media/ws-manage-compute-cluster.png)
+
+2.	Select **+New** to create a new compute cluster.
+
+3.	Keep all the defaults on the first page, select **Next**.
+
+    ![ws-manage-compute-cluster-config](Media/ws-manage-compute-cluster-config.png)
+
+4.	Name the cluster **cpu-cluster**. If this name already exists, add your initials to the name to make it unique.
+
+    ![ws-manage-compute-cluster-config-2](Media/ws-manage-compute-cluster-config-2.png)
+
+5.	Leave the **Minimum number of nodes** at 0.
+
+6.	Change the **Maximum number of nodes** to 4 if possible. Depending on your settings, you may have a smaller limit.
+
+7.	Change the Idle seconds before **scale down** to 120.
+
+8.	Leave the rest of the defaults and select **Create**.
+
+    ![ws-manage-compute-cluster-config-3](Media/ws-manage-compute-cluster-config-3.png)
+
+In less than a minute, the State of the cluster will change from Creating to Succeeded. The list shows the provisioned compute cluster, along with the number of idle nodes, busy nodes, and unprovisioned nodes. Since you haven't used the cluster yet, all the nodes are currently unprovisioned.
+
+**Note**
+
+When the cluster is created, it will have 0 nodes provisioned. The cluster does not incur costs until you submit a job. This cluster will scale down when it has been idle for 2,400 seconds (40 minutes). This will give you time to use it in a few tutorials if you wish without waiting for it to scale back up.
+
+
+### Congratulations!
+
+## Exercise 5: Quick Tour of the studio
+
+The studio is your web portal for Azure Machine Learning. This portal combines no-code and code-first experiences for an inclusive data science platform.
+Review the parts of the studio on the left-hand navigation bar:
+-   The Author section of the studio contains multiple ways to get started in creating machine learning models. You can:
+
+    -   **Notebooks** section allows you to create Jupyter Notebooks, copy sample notebooks, and run notebooks and Python scripts.
+
+        ![ws-authoring-notebooks](Media/ws-authoring-notebooks.png)
+
+    -   **Automated ML** steps you though created a machine learning model without writing code.
+
+        ![ws-authoring-automl](Media/ws-authoring-automl.png)
+
+    -   Designer gives you a drag-and-drop way to build models using prebuilt components.
+
+        ![ws-authoring-designer](Media/ws-authoring-designer.png)
+
+    -   The **Assets** section of the studio helps you keep track of the assets you create as you run your jobs. If you have a new workspace, there's nothing in any of these sections yet.
+
+        ![ws-assets](Media/ws-assets.png)
+
+    -   You already used the **Manage** section of the studio to create your compute resources. This section also lets you create and manage data and external services you link to your workspace.
+
+        ![ws-manage](Media/ws-manage.png)
+
+---
+
+### Congratulations!
+
+You have successfully completed this exercise and the Lab. You can move to the next lab.
